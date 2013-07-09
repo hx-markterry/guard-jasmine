@@ -120,6 +120,11 @@ describe Guard::Jasmine::CLI do
           cli.start(['spec', '--lines-threshold', '95'])
         end
 
+        it 'sets the notification support' do
+          runner.should_receive(:run).with(anything(), hash_including(notificaton: true, coverage: true,)).and_return [true, []]
+          cli.start(['spec', '--notification', 'true'])
+        end
+
         context 'for an invalid console option' do
           it 'sets the console option to failure' do
             runner.should_receive(:run).with(anything(), hash_including(console: :failure)).and_return [true, []]
@@ -192,6 +197,11 @@ describe Guard::Jasmine::CLI do
 
         it 'sets the coverage lines threshold' do
           runner.should_receive(:run).with(anything(), hash_including(lines_threshold: 0)).and_return [true, []]
+          cli.start(['spec'])
+        end
+
+        it 'disables notifications' do
+          runner.should_receive(:run).with(anything(), hash_including(notification: false)).and_return [true, []]
           cli.start(['spec'])
         end
 
@@ -318,10 +328,6 @@ describe Guard::Jasmine::CLI do
     end
 
     context 'for non changeable options' do
-      it 'disables notifications' do
-        runner.should_receive(:run).with(anything(), hash_including(notification: false)).and_return [true, []]
-        cli.start(['spec'])
-      end
 
       it 'hides success notifications' do
         runner.should_receive(:run).with(anything(), hash_including(hide_success: true)).and_return [true, []]

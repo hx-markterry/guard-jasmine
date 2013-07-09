@@ -363,6 +363,10 @@ rackup_config:  'spec/dummy/config.ru'        # Path to rackup config file (i.e.
                                               # default: ./config.ru
                                               # This option is useful when using guard-jasmine in a mountable engine
                                               # and the config.ru is within the dummy app
+
+notification: true                            # Show error and success notifications
+                                              # default: false
+
 ```
 
 If you're setting the `:server` option to `:none` or need to access your specs on a other host than `localhost`, you can

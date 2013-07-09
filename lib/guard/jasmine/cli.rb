@@ -137,6 +137,11 @@ module Guard
                     default: 0,
                     desc:    'Lines coverage threshold'
 
+     method_option :notification,
+                    type:    :boolean,
+                    default: false,
+                    desc:    'Show notifications'
+
       # Run the Guard::Jasmine::Runner with options from
       # the command line.
       #
@@ -166,7 +171,7 @@ module Guard
         runner_options[:functions_threshold]      = options.functions_threshold
         runner_options[:branches_threshold]       = options.branches_threshold
         runner_options[:lines_threshold]          = options.lines_threshold
-        runner_options[:notification]             = false
+        runner_options[:notification]             = options.notification
         runner_options[:hide_success]             = true
         runner_options[:max_error_notify]         = 0
 
